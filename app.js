@@ -25,7 +25,7 @@ const morseCodeArray = [
 ".--",  // W
 "-..-", // X
 "-.--", // Y
-"--..", // Z]
+"--..", // Z
 ".-.-", //Æ
 "---. ", //Ø
 ".--.- ", //Å
@@ -45,22 +45,37 @@ function updateView() {
         <br/>
         <br/>
         
-        </div>
+        <div id="result"></div>
     `
 }
 
 
 //controller
+
 function getVal() {
-    const val = document.querySelector('input').value;
+    const val = document.querySelector('input').value.toLocaleUpperCase();
     //console.log(val)
     
+   let morseOutput = '';
+
     for (let i = 0; i < val.length; i++) {
         //console.log(val[i])
-        const str = val[i].toString();
-        console.log(str)
+        const char = val[i];
+        if (char === ' ') {
+            morseOutput = ' / ';
+        }
+        else {
+            const index = char.charCodeAt(0) - 65;
+            if(index >= 0 && index < morseCodeArray.length) {
+                morseOutput += morseCodeArray[index] + ' ';
+            } else morseOutput += char + ' ';
+        }
     }
+    const resultDiv = document.getElementById('result');
+    resultDiv.textContent = morseOutput;
 }
+
+
 
 /*function showOutput() {
 
